@@ -1,0 +1,24 @@
+.BannerContainer {
+    display: flex;
+    width: 1000px;
+    flex-direction: row;
+}
+
+.Num {
+    display: flex;
+    width: 5%;
+
+    justify-content: center;
+}
+
+.UserId {
+    display: flex;
+    width: 10%;
+
+    justify-content: center;
+}
+
+.Title {
+    display: flex;
+    width: 85%;
+}
