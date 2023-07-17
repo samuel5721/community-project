@@ -7,18 +7,18 @@ import styles from './PostBanner.module.css';
 function PostBanner({ id, num, userId, title}) {
     
     if(id === 0) {
-        return <div key={id} className={styles.BannerContainer}>
+        return <div key={id} className={styles.IndexBannerContainer}>
         <div className={styles.Num}>번호</div>
-        <div className={styles.UserId}>유저</div>
-        <div className={styles.Title}>제목</div>
+        <div className={styles.IndexTitle}>제목</div>
+        <div className={styles.UserId}>글쓴이</div>
         </div>
     }
     
     
     return <Link  to={`/post/${id}`} key={id} className={styles.BannerContainer}>
         <div className={styles.Num}>{num}</div>
-        <div className={styles.UserId}>{userId}</div>
         <div className={styles.Title}>{title}</div>
+        <div className={styles.UserId}>{userId}</div>
         </Link>
 
 }

@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <div className="Home">
-        {loading ? <p>loading...</p> : 
+        
         <section>
           <form>
             <input type='text' value={null} placeholder='여기서 포스트 검색'></input>
@@ -34,11 +34,11 @@ function Home() {
             <PostBanner 
               id={0}
               num={0}
-              userId=''
+              userId={0}
               title=''
             />
-
-            {posts.map(post => {
+            {loading ? <p>loading...</p> : 
+            posts.map(post => {
               postCounter++;
               return <PostBanner 
                 id={Number(post.id)}
@@ -49,7 +49,7 @@ function Home() {
             })}
           </div>
         </section>
-        }
+        
     </div>
   );
 }
