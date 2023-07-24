@@ -19,8 +19,7 @@ function Home() {
   }, []);
 
   console.log(posts);
-
-  let postCounter = 0;
+  
 
   return (
     <div className="Home">
@@ -33,16 +32,14 @@ function Home() {
           <div>
             <PostBanner 
               id={0}
-              num={0}
               userId={0}
               title=''
             />
             {loading ? <p>loading...</p> : 
             posts.map(post => {
-              postCounter++;
-              return <PostBanner 
+              return <PostBanner
+                key={Number(post.id)}
                 id={Number(post.id)}
-                num={postCounter}
                 userId={post.userId}
                 title={post.title}
               />

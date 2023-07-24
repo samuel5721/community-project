@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 import styles from './PostBanner.module.css';
 
-function PostBanner({ id, num, userId, title}) {
+function PostBanner({ id, userId, title}) {
+    const navigate = useNavigate();
     
     if(id === 0) {
         return <div key={id} className={styles.IndexBannerContainer}>
@@ -15,17 +17,16 @@ function PostBanner({ id, num, userId, title}) {
     }
     
     
-    return <Link  to={`/post/${id}`} key={id} className={styles.BannerContainer}>
-        <div className={styles.Num}>{num}</div>
+    return <span onClick={() => {navigate(`/post/${id}`); window.location.reload();}}className={styles.BannerContainer}>
+        <div className={styles.Num}>{id}</div>
         <div className={styles.Title}>{title}</div>
         <div className={styles.UserId}>{userId}</div>
-        </Link>
+        </span>
 
 }
 
 PostBanner.propTypes = {
     id : PropTypes.number.isRequired,
-    num : PropTypes.number.isRequired,
     userId : PropTypes.number.isRequired,
     title : PropTypes.string.isRequired
 }
