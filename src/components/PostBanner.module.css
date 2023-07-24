@@ -1,55 +1,55 @@
 .IndexBannerContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-    padding : 5px 0px;
+  padding : 5px 0px;
 
-    font-weight: bold;
-    font-size: 13px;
+  font-weight: bold;
+  font-size: 13px;
 
-    border-top: solid 3px rgb(35, 139, 66);
-    border-bottom: solid 1px rgb(35, 139, 66);
+  border-top: solid 3px rgb(35, 139, 66);
+  border-bottom: solid 1px rgb(35, 139, 66);
 }
 
 .BannerContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
-    padding : 1px 0px;
+  padding : 1px 0px;
 
-    font-weight: 400;
-    font-size: 15px;
-    text-decoration: none;
-    color: black;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: none;
+  color: black;
 
-    border-bottom: solid 1px rgb(232, 232, 232);
+  border-bottom: solid 1px rgb(232, 232, 232);
 }
 
 .Num {
-    display: flex;
-    width: 5%;
+  display: flex;
+  width: 5%;
 
-    justify-content: center;
+  justify-content: center;
 }
 
 .UserId {
-    display: flex;
-    width: 10%;
+  display: flex;
+  width: 10%;
 
-    justify-content: center;
+  justify-content: center;
 }
 
 .Title {
-    display: flex;
-    width: 85%;
+  display: flex;
+  width: 85%;
 
 }
 
 .IndexTitle {
-    display: flex;
-    width: 85%;
+  display: flex;
+  width: 85%;
 
-    justify-content: center;
+  justify-content: center;
 }

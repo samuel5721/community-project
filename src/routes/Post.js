@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Params, useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+
+import Header from './Header';
+import AD from './AD';
 
 import PostBanner from '../components/PostBanner';
 import styles from './Post.module.css';
@@ -32,13 +34,21 @@ function Post() {
 
   return (
   <div className="Post">
+    <header>
+      <Header />
+    </header>
+    <main>
+    <aside>
+      <AD />
+    </aside>
     <section>
+      
       {(loading) ? <p>loading...</p> : 
-      <div>
+      <div className={styles.Content}>
         <p className={styles.Title}>{post.title}</p>
         <p className={styles.UserId}>글쓴이 : {post.userId}</p>
         <hr />
-        <p className={styles.Content}>{post.body}</p>
+        <p className={styles.Body}>{post.body}</p>
       </div>
       }
       <div>
@@ -58,6 +68,11 @@ function Post() {
             })}
           </div>
     </section>
+    <aside>
+        <AD />
+      </aside>
+    </main>
+    
   </div>
   );
 }

@@ -1,24 +1,26 @@
-* {
-    padding: 0 5px;
-}
+
 
 hr {
-    border: solid 1px rgb(35, 139, 66);
-}
-
-.Title {
-    font-size: 20px;
-    font-weight: 600;
-    
-}
-
-.UserId {
-    margin: 3px 0 10px 0;
-
-    font-size: 15px;
+  border: solid 1px rgb(35, 139, 66);
 }
 
 .Content {
-    margin-top: 20px;
-    font-size: 16px;
+  min-height: 300px;
+}
+
+.Title {
+  font-size: 20px;
+  font-weight: 600;
+  
+}
+
+.UserId {
+  margin: 3px 0 10px 0;
+
+  font-size: 15px;
+}
+
+.Body{
+  margin-top: 20px;
+  font-size: 16px;
 }
