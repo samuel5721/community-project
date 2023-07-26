@@ -1,0 +1,18 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width : 350px;
+  max-width: 350px;
+  height: 60px;
+
+  padding: 10px 15px;
+
+  border: solid 1px black;
+}
+
+.TitleText {
+  font-size: 20px;
+  font-weight: 500;
+}

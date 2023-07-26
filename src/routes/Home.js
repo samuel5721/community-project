@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from './Header';
-import AD from './AD';
+import AD from '../components/AD';
 
 import PostBanner from '../components/PostBanner';
 
@@ -15,7 +15,7 @@ function Home() {
   const getPosts = async () => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
     const json = await response.json();
-    setPosts(json);
+    setPosts(json.reverse());
     setLoading(false);
   }
 

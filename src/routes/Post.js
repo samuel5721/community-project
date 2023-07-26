@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Params, useParams } from 'react-router-dom';
 
 import Header from './Header';
-import AD from './AD';
-
+import AD from '../components/AD';
 import PostBanner from '../components/PostBanner';
+import SubPost from '../components/SubPost';
+
 import styles from './Post.module.css';
 
 function Post() {
     const [loading, setLoading] = useState(true);
     const [post, setPost] = useState([]);
+    const [prePost, setPrePost] = useState([]);
+    const [nextPost, setNextPost] = useState([]);
     const [posts, setPosts] = useState([]);
     const { id } = useParams();
   
@@ -17,13 +20,12 @@ function Post() {
       const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
       const json = await response.json();
 
-      setPosts(json);
+      setPosts(json.reverse());
 
       for(let e of json) {
-        if(e.id === Number(id)) {
-          setPost(e);
-          break;
-        }
+        if(e.id === Number(id)-1) setPrePost(e);
+        if(e.id === Number(id)) setPost(e);
+        if(e.id === Number(id)+1) setNextPost(e);
       }
       setLoading(false);
   }
@@ -52,21 +54,38 @@ function Post() {
       </div>
       }
       <div>
-            <PostBanner 
-              id={0}
-              userId={0}
-              title=''
+        <div>
+            <SubPost 
+              id={Number(prePost?.id)}
+              text='이전 포스트'
+              title={prePost?.title}
+              isLeftAlign={true}
             />
-            {loading ? <p>loading...</p> : 
-            posts.map(post => {
-              return <PostBanner
-                key={Number(post.id)}
-                id={Number(post.id)}
-                userId={post.userId}
-                title={post.title}
-              />
-            })}
-          </div>
+          <SubPost 
+              id={Number(nextPost?.id)}
+              text='다음 포스트'
+              title={nextPost?.title}
+              isLeftAlign={false}
+            />
+        </div>
+        <div style={{height:150}}></div>
+        <PostBanner 
+          id={0}
+          userId={0}
+          title=''
+        />
+        {
+          loading ? <p>loading...</p> : 
+          posts.map(post => {
+            return <PostBanner
+              key={Number(post.id)}
+              id={Number(post.id)}
+              userId={post.userId}
+              title={post.title}
+            />
+          })
+        }
+      </div>
     </section>
     <aside>
         <AD />
