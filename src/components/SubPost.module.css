@@ -3,16 +3,24 @@
   flex-direction: column;
   justify-content: center;
 
-  width : 350px;
-  max-width: 350px;
+  width : 300px;
+  max-width: 300px;
   height: 60px;
 
   padding: 10px 15px;
 
-  border: solid 1px black;
+  border-top: double 4px rgb(210, 210, 210);
+  background-color: rgb(246, 246, 246);
+}
+
+.HeadText {
+  padding: 0 10px;
+  margin-bottom: 1px;
+
+  font-size: 12px;
 }
 
 .TitleText {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 }

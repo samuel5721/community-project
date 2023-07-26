@@ -10,14 +10,15 @@ function SubPost({ id, text,  title, isLeftAlign}) {
   return(
     (isNaN(id)) ? <></> :
     <div onClick={() => {navigate(`/post/${id}`); window.location.reload();}}
+          
           style={{
             float : (isLeftAlign) ? 'left' : 'right',
             textAlign : (isLeftAlign) ? 'left' : 'right'
           }}
           >
-  <p>{text}</p>
+  <p className={styles.HeadText}>{text}</p>
   <div className={styles.Container}>
-    <p className={styles.TitleText}>{(title?.length<70) ? title : title?.substr(0,70)+'...'}</p>
+    <p className={styles.TitleText}>{(title?.length<100) ? title : title?.substr(0,100)+'...'}</p>
   </div>
 </div>
   )
