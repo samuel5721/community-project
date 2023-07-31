@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import Header from './Header';
+import Header from '../components/Header';
 import AD from '../components/AD';
+import Footer from '../components/Footer';
 
-import PostBanner from '../components/PostBanner';
+import PostList from '../components/PostList';
 
 import styles from './Home.module.css';
 
@@ -42,29 +42,17 @@ function Home() {
           <input type='text' value={null} placeholder='여기서 포스트 검색'></input>
           <button onClick={null}>검색</button>
         </form>
-        <div>
-          <PostBanner 
-            id={0}
-            userId={0}
-            title=''
-          />
-          
-          {loading ? <p>loading...</p> : 
-          
-          posts.map(post => {
-            return <PostBanner
-              key={Number(post.id)}
-              id={Number(post.id)}
-              userId={post.userId}
-              title={post.title}
-            />
-          })}
-        </div>
+        {(loading) ? <p>loading...</p> :
+        <PostList posts={posts}/>
+        }
       </section>
       <aside>
         <AD />
       </aside>
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

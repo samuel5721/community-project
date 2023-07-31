@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Params, useParams } from 'react-router-dom';
 
-import Header from './Header';
+import Header from '../components/Header';
 import AD from '../components/AD';
-import PostBanner from '../components/PostBanner';
+import Footer from '../components/Footer';
+
+import PostList from '../components/PostList';
 import SubPost from '../components/SubPost';
 
 import styles from './Post.module.css';
@@ -69,21 +71,8 @@ function Post() {
             />
         </div>
         <div style={{height:150}}></div>
-        <PostBanner 
-          id={0}
-          userId={0}
-          title=''
-        />
-        {
-          loading ? <p>loading...</p> : 
-          posts.map(post => {
-            return <PostBanner
-              key={Number(post.id)}
-              id={Number(post.id)}
-              userId={post.userId}
-              title={post.title}
-            />
-          })
+        {(loading) ? <p>loading...</p> :
+        <PostList posts={posts}/>
         }
       </div>
     </section>

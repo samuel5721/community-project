@@ -1,0 +1,40 @@
+.Pagination {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  display : flex;
+  align-items : center;
+  justify-content: center;
+
+  width : 25px;
+  height: 25px;
+  margin: 0 3px;
+
+  font-size: 13px;
+
+  background-color: rgb(35, 139, 66);
+  border-radius: 3px;
+  color: white
+}
+
+.unselected {
+  display : flex;
+  align-items : center;
+  justify-content: center;
+
+  width : 25px;
+  height: 25px;
+  margin: 0 3px;
+
+  font-size: 13px;
+
+  border: solid 1px rgb(35, 139, 66);
+  border-radius: 3px;
+  background-color: white;
+  color: black
+}

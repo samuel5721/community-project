@@ -6,7 +6,7 @@ import styles from './Header.module.css'
 function Header() {
     
   return (
-  <header>
+  <div>
     <nav className={styles.SignForm}>
       <p className={styles.SignForm_p}>로그인</p>
       <p className={styles.SignForm_p}>회원가입</p>
@@ -34,7 +34,7 @@ function Header() {
         <li className={styles.Menu_li}>건의사항</li>
         </ul>
     </nav>
-  </header>
+  </div>
   );
 }
 
