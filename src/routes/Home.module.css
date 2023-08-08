@@ -11,3 +11,28 @@
 
   margin-bottom: 10px;
 }
+
+.setPostsForm {
+  height: 25px;
+
+  display: flex;
+  justify-content: start;
+
+
+  margin-bottom: 10px;
+}
+
+.setPosts_input {
+  width: 35px;
+}
+
+.form_btn {
+  height: 20px;
+  margin: 0 5px;
+
+  background-color: rgb(35, 139, 66);
+  color: white;
+
+  border: none;
+  border-radius: 5px;
+}

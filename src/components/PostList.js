@@ -4,46 +4,62 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import PostBanner from './PostBanner';
 
-
 import styles from './PostList.module.css';
 
 function PostList({ posts }) {
   const [postsPerPage, setPostsPerPage] = useState(15);
   const [currentPage, setCurrentPage] = useState(0);
+  const [pagination, setPagination] = useState([]);
+  const [currentPosts, setCurrentPosts] = useState([]); // 현재 페이지의 게시물들을 저장할 상태
 
-  const setPagination = () => {
+  useEffect(() => {
+    // Pagination 설정
     let result = [];
     for(let i = 0; i<Math.ceil(posts.length / postsPerPage); i++) {
       if(currentPage === i) {
-        result.push(<div className={styles.selected}>{i+1}</div>)
+        result.push(<div className={styles.selected} key={i}>{i+1}</div>)
       } else {
-        result.push(<div className={styles.unselected}>{i+1}</div>)
+        result.push(<div className={styles.unselected} onClick={paginationItemClicked} key={i}>{i+1}</div>) // key prop 추가
       }
     }
-    return result;
+    setPagination(result);
+
+    // 현재 페이지의 게시물 가져오기
+    let postList = [];
+    for(let i=currentPage*postsPerPage; i<(currentPage+1)*postsPerPage && i<posts.length; i++) {
+      postList.push(posts[i]);
+    }
+    setCurrentPosts(postList);
+  }, [currentPage]);
+
+  const paginationItemClicked = (event) => {
+    setCurrentPage(Number(event.target.innerHTML) - 1);
   }
     
-  return <div>
-    <PostBanner 
+  return (
+    <div>
+      <PostBanner 
           id={0}
           userId={0}
           title=''
-        />
-        {
-          posts.map(post => {
-            return <PostBanner
+      />
+      {
+        currentPosts.map(post => { // 변경된 부분
+          return (
+            <PostBanner
               key={Number(post.id)}
               id={Number(post.id)}
               userId={post.userId}
               title={post.title}
             />
-          })
-        }
-        <div className={styles.Pagination}>
-          {setPagination()}
-        </div>
-  </div>
-
+          )
+        })
+      }
+      <div className={styles.Pagination}>
+        {pagination}
+      </div>
+    </div>
+  );
 }
 
 PostList.propTypes = {
