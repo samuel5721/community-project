@@ -23,8 +23,12 @@ function Home() {
 
   const setPostsFormChange = (e) => {
     setInputPostsPerPage(
-      (e.target.value < 0) ? 0 : e.target.value
+      (e.target.value <= 0) ? 1 : e.target.value
       );
+  }
+
+  const updatePostsPerPage = (e) => {
+    e.preventDefault();
   }
 
   useEffect(() => {
@@ -50,12 +54,17 @@ function Home() {
           <input type='text' value={null} placeholder='여기서 포스트 검색'></input>
           <button className={styles.form_btn} onClick={null}>검색</button>
         </form>
-        <form className={styles.setPostsForm}>
-          <input className={styles.setPosts_input} type='number' value={inputPostsPerPage} onChange={(event) => { setPostsFormChange(event) }}></input>
-          <button className={styles.form_btn} onClick={null}>적용</button>
+        <form className={styles.setPostsForm} onSubmit={updatePostsPerPage}>
+          <select className={styles.setPosts_select} value={inputPostsPerPage} onChange={setPostsFormChange}>
+            <option value={10}>10개</option>
+            <option value={15} selected>15개</option>
+            <option value={20}>20개</option>
+            <option value={30}>30개</option>
+            <option value={50}>50개</option>
+          </select>
         </form>
         {(loading) ? <p>loading...</p> :
-        <PostList posts={posts}/>
+          <PostList posts={posts} postsPerPageProp={inputPostsPerPage}/>
         }
       </section>
       <aside>

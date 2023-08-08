@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom';
 
 import PostBanner from './PostBanner';
 
 import styles from './PostList.module.css';
 
-function PostList({ posts }) {
-  const [postsPerPage, setPostsPerPage] = useState(15);
+function PostList({ posts, postsPerPageProp }) {
+  const [postsPerPage, setPostsPerPage] = useState(postsPerPageProp);
   const [currentPage, setCurrentPage] = useState(0);
   const [pagination, setPagination] = useState([]);
   const [currentPosts, setCurrentPosts] = useState([]); // 현재 페이지의 게시물들을 저장할 상태
@@ -30,7 +29,12 @@ function PostList({ posts }) {
       postList.push(posts[i]);
     }
     setCurrentPosts(postList);
-  }, [currentPage]);
+  }, [currentPage, postsPerPage]);
+
+  //postsPerPage 가져오기
+  useEffect(() => {
+    setPostsPerPage(postsPerPageProp);
+  }, [postsPerPageProp]);
 
   const paginationItemClicked = (event) => {
     setCurrentPage(Number(event.target.innerHTML) - 1);
@@ -64,6 +68,7 @@ function PostList({ posts }) {
 
 PostList.propTypes = {
   posts:PropTypes.array.isRequired,
+  postsPerPageProp:PropTypes.number.isRequired
 }
 
 export default PostList;

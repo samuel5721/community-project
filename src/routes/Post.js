@@ -72,7 +72,7 @@ function Post() {
         </div>
         <div style={{height:150}}></div>
         {(loading) ? <p>loading...</p> :
-        <PostList posts={posts}/>
+        <PostList posts={posts} postsPerPageProp={15}/>
         }
       </div>
     </section>
