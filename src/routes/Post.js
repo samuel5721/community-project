@@ -13,8 +13,8 @@ import styles from './Post.module.css';
 function Post() {
     const [loading, setLoading] = useState(true);
     const [post, setPost] = useState([]);
-    const [prePost, setPrePost] = useState([]);
-    const [nextPost, setNextPost] = useState([]);
+    const [prePost, setPrePost] = useState([]); //앞에 있는 서브 포스트
+    const [nextPost, setNextPost] = useState([]); //뒤에 있는 서브 포스트
     const [posts, setPosts] = useState([]);
     const { id } = useParams();
   
@@ -24,6 +24,7 @@ function Post() {
 
       setPosts(json.reverse());
 
+      //로딩할 포스트를 찾았을 때, 앞뒤 포스트도 같이 정의함
       for(let e of json) {
         if(e.id === Number(id)-1) setPrePost(e);
         if(e.id === Number(id)) setPost(e);
@@ -49,13 +50,16 @@ function Post() {
       
       {(loading) ? <p>loading...</p> : 
       <div className={styles.Content}>
+        {/** 글머리 */}
         <p className={styles.Title}>{post.title}</p>
         <p className={styles.UserId}>글쓴이 : {post.userId}</p>
         <hr />
+        {/** 글내용 */}
         <p className={styles.Body}>{post.body}</p>
       </div>
       }
       <div>
+        {/** 서브포스트 */}
         <div>
             <SubPost 
               id={Number(prePost?.id)}
@@ -70,9 +74,10 @@ function Post() {
               isLeftAlign={false}
             />
         </div>
+        {/** 기타 아래의 포스트들 */}
         <div style={{height:150}}></div>
         {(loading) ? <p>loading...</p> :
-        <PostList posts={posts} postsPerPageProp={15}/>
+        <PostList refinedPosts={posts} postsPerPageProp={15}/>
         }
       </div>
     </section>

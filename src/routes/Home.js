@@ -11,31 +11,47 @@ import styles from './Home.module.css';
 function Home() {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState([]);
+  const [refinedPosts, setRefinedPosts] = useState([]);
 
-  const [inputPostsPerPage, setInputPostsPerPage] = useState(15);
+  const [inputPostsPerPage, setInputPostsPerPage] = useState(15); //페이지 당 포스트 개수(입력)
+  const [searchText, setSearchText] = useState("");
 
   const getPosts = async () => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
     const json = await response.json();
     setPosts(json.reverse());
+    setRefinedPosts(json.reverse());
     setLoading(false);
   }
 
-  const setPostsFormChange = (e) => {
-    setInputPostsPerPage(
-      (e.target.value <= 0) ? 1 : e.target.value
-      );
+  /** setPostsForm 값이 변경되도록 함. 1보다 아래면 1로 고정   */
+  const postsFormChanged = (e) => {
+    setInputPostsPerPage( (e.target.value <= 0) ? 1 : e.target.value );
+  }
+  
+  /** search 내용 변경  */
+  const searchTextChange = (e) => {
+    setSearchText(e.target.value);
+    if(e.target.value === "") {
+      setRefinedPosts(posts);
+    }
   }
 
-  const updatePostsPerPage = (e) => {
-    e.preventDefault();
+  /** 검색 실행 */
+  const searchSubmit = async () => {
+    console.log(posts.filter(e => e.title.includes(searchText)));
+    setRefinedPosts(posts.filter(e => e.title.includes(searchText)));
   }
+
+  //posts 변경 시 이를 refined에 적용
+  useEffect(() => {
+    setRefinedPosts(posts);
+  }, [posts]);
 
   useEffect(() => {
     getPosts();
+    setInputPostsPerPage(30); //페이지 당 포스트 개수 기본값
   }, []);
-
-  console.log(posts);
   
 
   return (
@@ -50,12 +66,14 @@ function Home() {
       
       <section className={styles.Article}>
       <h3 className={styles.Title}>자유게시판</h3>
-        <form className={styles.SearchForm}>
-          <input type='text' value={null} placeholder='여기서 포스트 검색'></input>
-          <button className={styles.form_btn} onClick={null}>검색</button>
-        </form>
-        <form className={styles.setPostsForm} onSubmit={updatePostsPerPage}>
-          <select className={styles.setPosts_select} value={inputPostsPerPage} onChange={setPostsFormChange}>
+        {/** 검색 form */}
+        <div className={styles.SearchForm}>
+          <input type='text' value={searchText} onChange={searchTextChange} placeholder='여기서 포스트 검색'></input>
+          <button className={styles.form_btn} onClick={searchSubmit}>검색</button>
+        </div>
+        {/** 페이지당 포스트 지정 form */}
+        <form className={styles.setPostsForm} >
+          <select className={styles.setPosts_select} value={inputPostsPerPage} onChange={postsFormChanged}>
             <option value={10}>10개</option>
             <option value={15} selected>15개</option>
             <option value={20}>20개</option>
@@ -63,8 +81,9 @@ function Home() {
             <option value={50}>50개</option>
           </select>
         </form>
+        {/** postList 실행 */}
         {(loading) ? <p>loading...</p> :
-          <PostList posts={posts} postsPerPageProp={inputPostsPerPage}/>
+          <PostList refinedPosts={refinedPosts} postsPerPageProp={inputPostsPerPage}/>
         }
       </section>
       <aside>

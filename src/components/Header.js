@@ -27,11 +27,11 @@ function Header() {
         <li className={styles.Menu_li}>Q&A</li>
         <li className={styles.Menu_li}>|</li>
         <li className={styles.Menu_li}>아티뉴스</li>
-        <li className={styles.Menu_li}>시사상식</li>
+        <li className={styles.Menu_li}>코딩사전</li>
         <li className={styles.Menu_li}>공모전</li>
         <li className={styles.Menu_li}>오늘의 SW</li>
         <li className={styles.Menu_li}>|</li>
-        <li className={styles.Menu_li}>건의사항</li>
+        <li className={styles.Menu_li}>문의사항</li>
         </ul>
     </nav>
   </div>

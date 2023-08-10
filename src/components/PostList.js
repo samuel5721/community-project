@@ -5,7 +5,8 @@ import PostBanner from './PostBanner';
 
 import styles from './PostList.module.css';
 
-function PostList({ posts, postsPerPageProp }) {
+function PostList({ refinedPosts, postsPerPageProp }) {
+  const [posts, setPosts] = useState(refinedPosts);
   const [postsPerPage, setPostsPerPage] = useState(postsPerPageProp);
   const [currentPage, setCurrentPage] = useState(0);
   const [pagination, setPagination] = useState([]);
@@ -29,18 +30,25 @@ function PostList({ posts, postsPerPageProp }) {
       postList.push(posts[i]);
     }
     setCurrentPosts(postList);
-  }, [currentPage, postsPerPage]);
+  }, [currentPage, postsPerPage, posts]);
 
   //postsPerPage 가져오기
   useEffect(() => {
     setPostsPerPage(postsPerPageProp);
   }, [postsPerPageProp]);
+  
+  //posts 가져오기
+  useEffect(() => {
+    setPosts(refinedPosts);
+  }, [refinedPosts]);
 
+  /** 클릭된 값에 대응하는 페이지를 현재 페이지로 지정 */
   const paginationItemClicked = (event) => {
     setCurrentPage(Number(event.target.innerHTML) - 1);
   }
     
   return (
+    (posts?.length < 1) ? <p>앗! 아무것도 없네요!</p> :
     <div>
       <PostBanner 
           id={0}
@@ -48,7 +56,7 @@ function PostList({ posts, postsPerPageProp }) {
           title=''
       />
       {
-        currentPosts.map(post => { // 변경된 부분
+        currentPosts.map(post => { 
           return (
             <PostBanner
               key={Number(post.id)}
@@ -63,11 +71,11 @@ function PostList({ posts, postsPerPageProp }) {
         {pagination}
       </div>
     </div>
-  );
+    );
 }
 
 PostList.propTypes = {
-  posts:PropTypes.array.isRequired,
+  refinedPosts:PropTypes.array.isRequired,
   postsPerPageProp:PropTypes.number.isRequired
 }
 
